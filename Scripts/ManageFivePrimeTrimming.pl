@@ -3,19 +3,22 @@ use warnings;
 use strict;
 use threads;
 use Thread::Queue;
+use FindBin;
+use lib "$FindBin::Bin/../Lib";
+use Configuration;
+use Tools;
 
-use lib '/home/hpriest/Scripts/Library';
-use hdpTools;
+my $configFile=$ARGV[0];
+my $inDir=$ARGV[1];
+my $outDir=$ARGV[2];
+my $length=$ARGV[3];
 
-my $inDir=$ARGV[0];
-my $outDir=$ARGV[1];
-my $length=$ARGV[2];
-my $threads=$ARGV[3];
-
-die "usage: perl $0 <input directory (must be *.fastq files)> <output directory> <length of 5\' trim> <threads>\n\n" unless $inDir && $outDir && $length && $threads;
+die "usage: perl $0 <QC config file> <input directory (must be *.fastq files)> <output directory> <length of 5\' trim> <threads>\n\n" unless $configFile && $inDir && $outDir && $length;
 
 my $q = Thread::Queue->new();
-my $script="/home/hpriest/Scripts/SequenceQC/TrimFrontFastq.pl";
+my $config = Configuration->new($configFile);
+my $threads = $config->get("OPTIONS","managerThreads") * $config->get("OPTIONS","Threads");
+my $script=$config->get("PATHS","FivePrimeTrimmer");
 
 my @files=grep {m/fastq$/} @{hdpTools->LoadDir($inDir)};
 foreach my $file (@files){

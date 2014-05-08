@@ -3,20 +3,6 @@ managerThreads    = 2
 Threads           = 8
 
 [PATHS]
-FivePrimeTrimmer	= /home/ec2-user/Filtering/Lib/TrimFrontFastq.pl
-     = /Root/Analysis/Directory
-dataDir     = /Path/To/Data/Directory
-Index       = /Path/To/Bowtie2/Index
-
-[ALIAS]
-File1.fastq = Line_1
-File2.fastq = Line_2
-File3.fastq = Line_3
-File4.fastq = Line_4
-
-[FILES]
-File1.fastq = 2
-File2.fastq = 2
-File3.fastq = 2
-File4.fastq = 2
-
+FivePrimeTrimmer= /home/ec2-user/Filtering/Lib/TrimFrontFastq.pl
+CutAdapt	= /usr/bin/cutadapt
+fastq_quality_trimmer = /Installs/fastx-toolkit/fastq_quality_trimmer 

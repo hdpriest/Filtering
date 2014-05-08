@@ -3,19 +3,26 @@ use warnings;
 use strict;
 use threads;
 use Thread::Queue;
+use FindBin;
+use lib "$FindBin::Bin/../Lib";
+use Configuration;
+use Tools;
 
-use lib '/home/hpriest/Scripts/Library';
-use hdpTools;
+my $configFile=$ARGV[0];
+my $inDir=$ARGV[1];
+my $outDir=$ARGV[2];
 
-my $inDir=$ARGV[0];
-my $outDir=$ARGV[1];
-my $threads=$ARGV[2];
+die "usage: perl $0 <QC config file> <input directory (must be *.fastq files)> <output directory> <threads>\n\n" unless $configFile && $inDir && $outDir;
 
-die "usage: perl $0 <input directory (must be *.fastq files)> <output directory> <threads>\n\n" unless $inDir && $outDir && $threads;
+my $config=Configuration->new($configFile);
+
+my $threads = $config->get("OPTIONS","managerThreads") * $config->get("OPTIONS","Threads");
 
 my $q = Thread::Queue->new();
-my $script="/home/dbryant/bin/fastx_toolkit-0.0.13.2/bin/fastq_quality_trimmer";
+
+my $script=$config->get("PATHS","fastq_quality_trimmer");
 my $opts="-t 30 -Q 33";
+
 
 my @files=grep {m/fastq$/} @{hdpTools->LoadDir($inDir)};
 unless(defined($files[0])){

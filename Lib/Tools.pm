@@ -4,7 +4,8 @@ package Tools;
 
 use warnings;
 use strict;
-use lib '/home/hpriest/Scripts/Library';
+use FindBin;
+use lib "$FindBin::Bin/../Lib";
 use Statistics::RankCorrelation;
 use threads;
 use Benchmark ':hireswallclock';

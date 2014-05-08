@@ -2,12 +2,16 @@
 use warnings;
 use strict;
 
-use lib '/home/hpriest/Scripts/Library';
-use hdpTools;
+use FindBin;
+use lib "$FindBin::Bin/../Lib";
+use Configuration;
+use Tools;
 
-my $dir =$ARGV[0];
-my $odir=$ARGV[1];
-die "usage: perl $0 <directory containing.fastq files> <output dir>\n\n" unless $#ARGV==1;
+my $configFile = $ARGV[0];
+my $dir	=$ARGV[1];
+my $odir=$ARGV[2];
+my $config= Configuration->new($configFile);
+die "usage: perl $0 <sequence QC configuration file> <directory containing .fastq files> <output dir>\n\n" unless $#ARGV==2;
 
 opendir(DIR,$dir) || die "cannot open directory $dir!\n$!\nexiting...\n";
 my @files = grep {m/fastq$/} readdir(DIR);
@@ -16,7 +20,10 @@ unless(defined($files[0])){
 	@files=grep {m/fq$/} readdir (DIR);
 }
 close DIR;
-my $command="/nfs4shares/bioinfosw/installs_current/cutadapt-1.1/bin/cutadapt -e 0.1 -n 5 -O 10 --match-read-wildcards -b  GATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG -b ACACTCTTTCCCTACACGACGCTCTTCCGATCT -b AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -b CAAGCAGAAGACGGCATACGAGCTCTTCCGATCT -b GATCGGAAGAGCACACGTCTGAACTCCAGTCAC -b ATCTCGTATGCCGTCTTCTGCTTG -b AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGA -b CAAGCAGAAGACGGCATACGAGAT -b GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC -b AGATCGGAAGAGCACACGTCTGAACTCCAGTCACC";
+
+my $cutAdapt= $config->get('PATHS','CutAdapt');
+
+my $command=$cutAdapt." -e 0.1 -n 5 -O 10 --match-read-wildcards -b  GATCGGAAGAGCTCGTATGCCGTCTTCTGCTTG -b ACACTCTTTCCCTACACGACGCTCTTCCGATCT -b AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -b CAAGCAGAAGACGGCATACGAGCTCTTCCGATCT -b GATCGGAAGAGCACACGTCTGAACTCCAGTCAC -b ATCTCGTATGCCGTCTTCTGCTTG -b AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGA -b CAAGCAGAAGACGGCATACGAGAT -b GATCGGAAGAGCACACGTCTGAACTCCAGTCACCGATGTATCTCGTATGC -b AGATCGGAAGAGCACACGTCTGAACTCCAGTCACC";
 
 foreach my $file (@files){
 	my $path=$dir."/".$file;
