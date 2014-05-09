@@ -35,5 +35,6 @@ foreach my $file (@files){
 	}
 	$out=$odir."/".$out;
 	my $cmd=$command." $path -o $out";
-	print $cmd."\n";
+	warn $cmd."\n";
+	`$cmd`;
 }
