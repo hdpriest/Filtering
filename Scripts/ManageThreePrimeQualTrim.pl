@@ -24,9 +24,9 @@ my $script=$config->get("PATHS","fastq_quality_trimmer");
 my $opts="-t 30 -Q 33";
 
 
-my @files=grep {m/fastq$/} @{hdpTools->LoadDir($inDir)};
+my @files=grep {m/fastq$/} @{Tools->LoadDir($inDir)};
 unless(defined($files[0])){
-	@files=grep {m/fq$/} @{hdpTools->LoadDir($inDir)};
+	@files=grep {m/fq$/} @{Tools->LoadDir($inDir)};
 }
 
 foreach my $file (@files){
