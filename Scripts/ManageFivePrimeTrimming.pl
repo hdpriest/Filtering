@@ -20,8 +20,9 @@ my $config = Configuration->new($configFile);
 my $threads = $config->get("OPTIONS","managerThreads") * $config->get("OPTIONS","Threads");
 my $script=$config->get("PATHS","FivePrimeTrimmer");
 
-my @files=grep {m/fastq$/} @{hdpTools->LoadDir($inDir)};
+my @files=grep {m/fastq$/} @{Tools->LoadDir($inDir)};
 foreach my $file (@files){
+	warn "processing $file\n";
 	my $Ipath=$inDir."/$file";
 	my $Opath=$outDir."/$file";
 	$Opath=~s/fastq/5pTrim\.fastq/;
