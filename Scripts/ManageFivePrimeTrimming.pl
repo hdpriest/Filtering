@@ -8,6 +8,7 @@ use lib "$FindBin::Bin/../Lib";
 use Configuration;
 use Tools;
 
+
 my $configFile=$ARGV[0];
 my $inDir=$ARGV[1];
 my $outDir=$ARGV[2];
