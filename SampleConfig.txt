@@ -1,19 +1,24 @@
 [OPTIONS]
-managerThreads    = 2
-Threads           = 4
+Threads	= 8
+LengthOf5pTrim = 15
+Min3pQuality = 30
+Min3pLength  = 50
+
 
 [PATHS]
-FivePrimeTrimmer= /home/ec2-user/Filtering/Lib/TrimFrontFastq.pl
-CutAdapt	= /usr/bin/cutadapt
-fastq_quality_trimmer = /Installs/fastx-toolkit/fastq_quality_trimmer 
+FivePrimeTrimmer= /home/ec2-user/Store1/Filtering/Lib/TrimFrontFastq.pl
+fastq_quality_trimmer = /Installs/fastx-toolkit/fastq_quality_trimmer
+PairsAndOrphans = /home/ec2-user/Store1/Filtering/Scripts/GetPairsSinglesFastqs.Illumina1.8.pl
 
 [PIPELINE]
 FivePrimeFilter	= 1
 ThreePrimeFilter= 1
 PairedEnd	= 1
-Compressed	= 1
+Compressed	= 0
+
+[GROUPS]
+Notch3c11	= Sample_lane1-index21-GTTTCG-Notch3_clone11-Adapt21,Sample_lane2-index21-GTTTCG-Notch3_clone11-Adapt21
 
 [DIRECTORIES]
-Data	= /path/to/Data/Dir
-Temp	= /path/to/Temp/Dir
-Output	= /path/to/output/Dir
+Data = /home/ec2-user/Store1/Data
+Output	= /home/ec2-user/Store1/FinalData
