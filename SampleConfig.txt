@@ -1,8 +1,19 @@
 [OPTIONS]
 managerThreads    = 2
-Threads           = 8
+Threads           = 4
 
 [PATHS]
 FivePrimeTrimmer= /home/ec2-user/Filtering/Lib/TrimFrontFastq.pl
 CutAdapt	= /usr/bin/cutadapt
 fastq_quality_trimmer = /Installs/fastx-toolkit/fastq_quality_trimmer 
+
+[PIPELINE]
+FivePrimeFilter	= 1
+ThreePrimeFilter= 1
+PairedEnd	= 1
+Compressed	= 1
+
+[DIRECTORIES]
+Data	= /path/to/Data/Dir
+Temp	= /path/to/Temp/Dir
+Output	= /path/to/output/Dir
