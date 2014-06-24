@@ -18,7 +18,7 @@ die "usage: perl $0 <QC config file> <input directory (must be *.fastq files)> <
 
 my $q = Thread::Queue->new();
 my $config = Configuration->new($configFile);
-my $threads = $config->get("OPTIONS","managerThreads") * $config->get("OPTIONS","Threads");
+my $threads = $config->get("OPTIONS","Threads");
 my $script=$config->get("PATHS","FivePrimeTrimmer");
 
 my @files=grep {m/fastq$/} @{Tools->LoadDir($inDir)};
