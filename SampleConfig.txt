@@ -14,11 +14,16 @@ PairsAndOrphans = /home/ec2-user/Store1/Filtering/Scripts/GetPairsSinglesFastqs.
 FivePrimeFilter	= 1
 ThreePrimeFilter= 1
 PairedEnd	= 1
-Compressed	= 0
+Compressed	= 1
 
 [GROUPS]
-Notch3c11	= Sample_lane1-index21-GTTTCG-Notch3_clone11-Adapt21,Sample_lane2-index21-GTTTCG-Notch3_clone11-Adapt21
+RK352011 = Sample_lane1-index01-ATCACG-RK35_2011_C1GHC46,Sample_lane2-index01-ATCACG-RK35_2011_C1GHC46
+RN317c155=Sample_lane1-index02-CGATGT-RN317_clone155,Sample_lane2-index02-CGATGT-RN317_clone155
+RN69SSIcP9G7=Sample_lane1-index03-TTAGGC-RN69-SSI_cloneP9G7-Adapt3,Sample_lane2-index03-TTAGGC-RN69-SSI_cloneP9G7-Adapt3
+Notch3c11=Sample_lane1-index09-GATCAG-Notch3_clone11-Adapt9,Sample_lane2-index09-GATCAG-Notch3_clone11-Adapt9
+Covex5000c190=Sample_lane1-index13-AGTCAA-covex5000-190,Sample_lane2-index13-AGTCAA-covex5000-190
+
 
 [DIRECTORIES]
 Data = /home/ec2-user/Store1/Data
-Output	= /home/ec2-user/Store1/FinalData
+Output	= /home/ec2-user/Store1/Final
