@@ -77,7 +77,7 @@ sub workerThread{
 				warn $command."\n";
 				`$command`;
 				push @CurrentSourcePaths, $oPath;
-				push @GarbageCollector, $oPath;
+				push @GarbageCollector, $oPath if $config->get("PIPELINE","Compressed");
 			}
 		}
 		if($config->get("PIPELINE","ThreePrimeFilter")){
@@ -106,8 +106,8 @@ sub workerThread{
 			my $script = $config->get("PATHS","PairsAndOrphans");
 			my @R1=grep {m/\_R1\_/} @thisSet;
 			my @R2=grep {m/\_R2\_/} @thisSet;
-			my $T1=$DataDir."/TempRead1.fastq";
-			my $T2=$DataDir."/TempRead2.fastq";
+			my $T1=$DataDir."/$grp.TempRead1.fastq";
+			my $T2=$DataDir."/$grp.TempRead2.fastq";
 			my $command="cat ".join(" ",@R1)." > $T1";
 			warn $command."\n";
 			`$command`;
